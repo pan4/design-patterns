@@ -8,17 +8,18 @@ public class DataAPIAdapter extends DataAPI {
     public DataAPIAdapter(DataAPI dataAPI) {
         super(dataAPI.getId(), dataAPI.getTypeOfData(), dataAPI.getDataFX(), dataAPI.getDataMX(),
                 dataAPI.getDataSX(), dataAPI.getDataBX());
-        this.dataAPI = dataAPI;
-    }
 
-    @Override
-    public String getDataFX() {
         String result = super.getDataFX()
                 .concat(getDataMX())
                 .concat(getDataSX())
                 .concat(getDataBX());
         setResultX(result);
-        dataAPI.setResultX(result);
-        return result;
+        this.dataAPI = dataAPI;
+        this.dataAPI.setResultX(result);
+    }
+
+    @Override
+    public String getDataFX() {
+        return getResultX();
     }
 }

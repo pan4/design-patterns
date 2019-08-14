@@ -3,9 +3,7 @@ package com.gof.iteration8;
 import com.gof.customer.core.DataAPI;
 import org.junit.Test;
 
-import java.util.regex.Pattern;
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class Iteration8Test {
 
@@ -15,22 +13,40 @@ public class Iteration8Test {
     }
 
     @Test
-    public void testDataAPIFactories(){
-        Pattern chars = Pattern.compile("^[a-zA-Z]+$");
-        Pattern nums = Pattern.compile("^[0-9]+$");
+    public void testDataAPIBuilder(){
+        Long id = 1L;
+        String chars = "aBcDe";
+        String nums = "01234";
 
-        DataAPI dataA = new DataAPIFactoryA().createDataAPI(1L);
-        assertTrue(chars.matcher(dataA.getDataMX()).matches());
-        assertTrue(chars.matcher(dataA.getDataSX()).matches());
+        DataAPI dataA = new DataAPIBuilder(id)
+                .dataMX(chars)
+                .dataSX(chars)
+                .build();
 
-        DataAPI dataB = new DataAPIFactoryB().createDataAPI(2L);
-        assertTrue(chars.matcher(dataB.getDataFX()).matches());
-        assertTrue(chars.matcher(dataB.getDataBX()).matches());
+        DataAPI dataB = new DataAPIBuilder(id)
+                .dataFX(chars)
+                .dataBX(chars)
+                .build();
 
-        DataAPI dataC = new DataAPIFactoryC().createDataAPI(3L);
-        assertTrue(nums.matcher(dataC.getDataMX()).matches());
-        assertTrue(chars.matcher(dataC.getDataSX()).matches());
-        assertTrue(chars.matcher(dataC.getDataFX()).matches());
-        assertTrue(nums.matcher(dataC.getDataBX()).matches());
+        DataAPI dataC = new DataAPIBuilder(id)
+                .dataMX(nums)
+                .dataSX(chars)
+                .dataFX(chars)
+                .dataBX(nums)
+                .build();
+
+        assertEquals(dataA.getId(), id);
+        assertEquals(dataA.getDataMX(), chars);
+        assertEquals(dataA.getDataSX(), chars);
+
+        assertEquals(dataB.getId(), id);
+        assertEquals(dataB.getDataFX(), chars);
+        assertEquals(dataB.getDataBX(), chars);
+
+        assertEquals(dataC.getId(), id);
+        assertEquals(dataC.getDataMX(), nums);
+        assertEquals(dataC.getDataSX(), chars);
+        assertEquals(dataC.getDataFX(), chars);
+        assertEquals(dataC.getDataBX(), nums);
     }
 }
