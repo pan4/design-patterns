@@ -1,4 +1,4 @@
-package com.gof.iteration7;
+package com.gof.iteration7.lambdabased;
 
 import com.gof.customer.core.DataAPI;
 

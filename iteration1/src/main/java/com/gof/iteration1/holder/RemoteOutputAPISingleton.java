@@ -1,4 +1,4 @@
-package com.gof.iteration1;
+package com.gof.iteration1.holder;
 
 import com.gof.customer.RemoteOutputAPI;
 

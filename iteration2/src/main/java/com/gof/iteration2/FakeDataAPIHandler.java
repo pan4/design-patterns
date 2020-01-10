@@ -9,12 +9,11 @@ public class FakeDataAPIHandler extends DataAPIHandler {
     }
 
     @Override
-    public DataAPI handle(DataAPI dataAPI) {
-        if (TypeOfData.FAKE == dataAPI.getTypeOfData()) {
-            dataAPI.setDataFX(dataAPI.getDataFX().concat("3"));
-        } else {
-            super.handle(dataAPI);
+    protected DataAPIRequest handleInternal(DataAPIRequest dataAPIRequest) {
+        if (TypeOfData.FAKE == dataAPIRequest.getTypeOfData()) {
+            dataAPIRequest.setDataFX(dataAPIRequest.getDataFX().concat("3"));
+            dataAPIRequest.setHandled(true);
         }
-        return dataAPI;
+        return dataAPIRequest;
     }
 }

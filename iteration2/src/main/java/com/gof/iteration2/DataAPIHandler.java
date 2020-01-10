@@ -1,7 +1,5 @@
 package com.gof.iteration2;
 
-import com.gof.customer.core.DataAPI;
-
 public abstract class DataAPIHandler {
     private DataAPIHandler next;
 
@@ -9,10 +7,13 @@ public abstract class DataAPIHandler {
         this.next = next;
     }
 
-    public DataAPI handle(DataAPI dataAPI) {
-        if (next != null) {
-            next.handle(dataAPI);
+    public final DataAPIRequest handle(DataAPIRequest dataAPIRequest) {
+        handleInternal(dataAPIRequest);
+        if (!dataAPIRequest.isHandled() && next != null) {
+            next.handle(dataAPIRequest);
         }
-        return dataAPI;
+        return dataAPIRequest;
     }
+
+    protected abstract DataAPIRequest handleInternal(DataAPIRequest dataAPI);
 }

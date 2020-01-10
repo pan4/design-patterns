@@ -3,6 +3,7 @@ package com.gof.iteration1;
 import com.gof.customer.RemoteInputAPI;
 import com.gof.customer.RemoteOutputAPI;
 import com.gof.customer.core.DataAPI;
+import com.gof.iteration1.doublecheck.RemoteOutputAPISingleton;
 
 public class Iteration1 {
 

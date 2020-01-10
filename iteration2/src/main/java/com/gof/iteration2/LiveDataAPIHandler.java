@@ -9,12 +9,11 @@ public class LiveDataAPIHandler extends DataAPIHandler {
     }
 
     @Override
-    public DataAPI handle(DataAPI dataAPI) {
-        if (TypeOfData.LIVE == dataAPI.getTypeOfData()) {
-            dataAPI.setDataFX(dataAPI.getDataFX().concat("1"));
-        } else {
-            super.handle(dataAPI);
+    protected DataAPIRequest handleInternal(DataAPIRequest dataAPIRequest) {
+        if (TypeOfData.LIVE == dataAPIRequest.getTypeOfData()) {
+            dataAPIRequest.setDataFX(dataAPIRequest.getDataFX().concat("1"));
+            dataAPIRequest.setHandled(true);
         }
-        return dataAPI;
+        return dataAPIRequest;
     }
 }

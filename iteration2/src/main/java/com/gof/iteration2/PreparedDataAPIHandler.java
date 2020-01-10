@@ -9,12 +9,11 @@ public class PreparedDataAPIHandler extends DataAPIHandler {
     }
 
     @Override
-    public DataAPI handle(DataAPI dataAPI) {
-        if (TypeOfData.PREPARED == dataAPI.getTypeOfData()) {
-            dataAPI.setDataFX(dataAPI.getDataFX().concat("2"));
-        } else {
-            super.handle(dataAPI);
+    public DataAPIRequest handleInternal(DataAPIRequest dataAPIRequest) {
+        if (TypeOfData.PREPARED == dataAPIRequest.getTypeOfData()) {
+            dataAPIRequest.setDataFX(dataAPIRequest.getDataFX().concat("2"));
+            dataAPIRequest.setHandled(true);
         }
-        return dataAPI;
+        return dataAPIRequest;
     }
 }

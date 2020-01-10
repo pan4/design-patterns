@@ -22,7 +22,9 @@ public class Iteration2Test {
     public void testDataApiHandlerChain() {
         List<DataAPI> data = channel1.getDataAPI();
         List<String> origins = data.stream().map(dataAPI -> dataAPI.getDataFX()).collect(Collectors.toList());
-        Iteration2.run(data);
+        data = data.stream()
+                .map(dataAPI -> Iteration2.chain.handle(new DataAPIRequest(dataAPI)))
+                .collect(Collectors.toList());
         for (int i = 0; i < data.size(); i++) {
             String result = data.get(i).getDataFX();
             String origin = origins.get(i);

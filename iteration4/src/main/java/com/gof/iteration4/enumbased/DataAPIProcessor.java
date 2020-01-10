@@ -1,4 +1,4 @@
-package com.gof.iteration4;
+package com.gof.iteration4.enumbased;
 
 import com.gof.customer.core.DataAPI;
 import com.gof.customer.data.TypeOfData;
